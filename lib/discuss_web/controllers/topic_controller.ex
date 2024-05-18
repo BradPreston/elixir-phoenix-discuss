@@ -4,6 +4,10 @@ defmodule DiscussWeb.TopicController do
   alias Discuss.Topic
   alias Discuss.Repo
 
+  def index(conn, _params) do
+    render(conn, :index)
+  end
+
   def new(conn, _params) do
     changeset = Topic.changeset(%Topic{}, %{})
 
