@@ -5,7 +5,8 @@ defmodule DiscussWeb.TopicController do
   alias Discuss.Repo
 
   def index(conn, _params) do
-    render(conn, :index)
+    topics = Repo.all(Topic)
+    render(conn, :index, topics: topics)
   end
 
   def new(conn, _params) do
