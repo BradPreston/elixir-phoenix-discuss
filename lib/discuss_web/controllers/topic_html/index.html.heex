@@ -6,4 +6,14 @@
       <li><%= topic.title %></li>
     <% end %>
   </ul>
+
+  <div class="fixed bottom-20 right-20 rounded-full bg-blue-500 w-12 h-12 flex justify-center content-center hover:bg-blue-600 transition">
+    <.link
+      navigate={~p"/topics/new"}
+      class="text-white text-5xl leading-[2.6rem]"
+      title="Create a topic"
+    >
+      &plus;
+    </.link>
+  </div>
 </div>
