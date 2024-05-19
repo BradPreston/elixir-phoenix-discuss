@@ -3,6 +3,7 @@ defmodule DiscussWeb.TopicController do
 
   alias Discuss.Topic
   alias Discuss.Repo
+  # alias DiscussWeb.Router.Helpers, as: Routes
 
   def index(conn, _params) do
     topics = Repo.all(Topic)
@@ -22,13 +23,17 @@ defmodule DiscussWeb.TopicController do
     changeset = Topic.changeset(%Topic{}, topic)
 
     case Repo.insert(changeset) do
-      {:ok, post} ->
-        nil
+      {:ok, _post} ->
+        conn
+        |> put_flash(:info, "Topic created")
+        |> redirect(to: ~p"/topics")
 
       # tightly couples the form with the changeset. If any errors occur,
       # the form will display the errors to the user
       {:error, changeset} ->
-        render(conn, :new, changeset: changeset)
+        conn
+        |> put_flash(:error, "An issue occurred")
+        |> render(:new, changeset: changeset)
     end
   end
 end
