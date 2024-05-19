@@ -7,13 +7,13 @@
     <% end %>
   </ul>
 
-  <div class="fixed bottom-20 right-20 rounded-full bg-blue-500 w-12 h-12 flex justify-center content-center hover:bg-blue-600 transition">
+  <div class="fixed bottom-20 right-20">
     <.link
       navigate={~p"/topics/new"}
-      class="text-white text-5xl leading-[2.6rem]"
+      class="text-white flex justify-center items-center relative w-12 text-5xl aspect-square rounded-full bg-blue-500 hover:bg-blue-600 transition-colors"
       title="Create a topic"
     >
-      &plus;
+      <span class="absolute -top-1">&plus;</span>
     </.link>
   </div>
 </div>
