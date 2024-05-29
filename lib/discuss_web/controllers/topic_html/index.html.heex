@@ -3,7 +3,16 @@
 
   <ul>
     <%= for topic <- @topics do %>
-      <li><%= topic.title %></li>
+      <li class="flex justify-between mb-3 border-b-2 border-b-slate-300 pb-2">
+        <%= topic.title %>
+        <.link
+          navigate={~p"/topics/#{topic.id}/edit"}
+          title={"Edit #{topic.title}"}
+          class="text-blue-500"
+        >
+          Edit
+        </.link>
+      </li>
     <% end %>
   </ul>
 

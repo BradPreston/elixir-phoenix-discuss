@@ -36,4 +36,36 @@ defmodule DiscussWeb.TopicController do
         |> render(:new, changeset: changeset)
     end
   end
+
+  # edit is used to show the form to edit a topic
+  # pattern match id into a variable called topic_id. id comes from
+  # the route wildcard that we called id: /topics/:id/edit
+  def edit(conn, %{"id" => topic_id}) do
+    # SELECT FROM topics WHERE id = topic_id
+    topic = Repo.get(Topic, topic_id)
+    # if changeset params is null (like it is here), the changeset
+    # creates an empty map (%{})
+    changeset = Topic.changeset(topic)
+    # render the edit template (edit.html.heex) and pass in the
+    # changeset and topic from database
+    render(conn, :edit, changeset: changeset, topic: topic)
+  end
+
+  # update is used to update the topic in the database with the new data
+  def update(conn, %{"id" => topic_id, "topic" => topic}) do
+    old_topic = Repo.get(Topic, topic_id)
+    changeset = Topic.changeset(old_topic, topic)
+
+    case Repo.update(changeset) do
+      {:ok, _topic} ->
+        conn
+        |> put_flash(:info, "Topic Updated")
+        |> redirect(to: ~p"/topics")
+
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "An issue occurred")
+        |> render(:edit, changeset: changeset, topic: old_topic)
+    end
+  end
 end

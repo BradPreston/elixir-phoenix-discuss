@@ -1,0 +1,8 @@
+<.header>
+  <p class="text-sky-800">Edit Topic</p>
+  <p class="text-sm text-blue-500">Use this form to update a topic record in your database.</p>
+</.header>
+
+<.topic_form changeset={@changeset} action={~p"/topics/#{@topic.id}"} />
+
+<.back navigate={~p"/topics"}>Back to topics</.back>
