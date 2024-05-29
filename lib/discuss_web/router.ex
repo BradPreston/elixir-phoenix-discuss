@@ -26,6 +26,20 @@ defmodule DiscussWeb.Router do
     delete "/topics/:id", TopicController, :delete
   end
 
+  scope "/auth", DiscussWeb do
+    # pipe_through runs the code from :browser (line 4)
+    # before running any of the routes below
+    pipe_through :browser
+
+    # :provider is a wildcard for any OAuth strategies ex:
+    # github, facebook, google, etc.
+    # :request is defined for us by the ueberauth module
+    # initiate login with github
+    get "/:provider", AuthController, :request
+    # user sent here from github
+    get "/:provider/callback", AuthController, :callback
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", DiscussWeb do
   #   pipe_through :api
