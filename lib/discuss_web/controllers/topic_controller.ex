@@ -68,4 +68,17 @@ defmodule DiscussWeb.TopicController do
         |> render(:edit, changeset: changeset, topic: old_topic)
     end
   end
+
+  def delete(conn, %{"id" => topic_id}) do
+    # get! (get bang) will raise an error if getting the
+    # topic encounters any issue
+    Repo.get!(Topic, topic_id)
+    # delete! (delete bang) will also raise an error if
+    # something does go wrong
+    |> Repo.delete!()
+
+    conn
+    |> put_flash(:info, "Topic Deleted")
+    |> redirect(to: ~p"/topics")
+  end
 end

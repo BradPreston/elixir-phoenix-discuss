@@ -5,13 +5,23 @@
     <%= for topic <- @topics do %>
       <li class="flex justify-between mb-3 border-b-2 border-b-slate-300 pb-2">
         <%= topic.title %>
-        <.link
-          navigate={~p"/topics/#{topic.id}/edit"}
-          title={"Edit #{topic.title}"}
-          class="text-blue-500"
-        >
-          Edit
-        </.link>
+        <div class="flex gap-3">
+          <.link
+            navigate={~p"/topics/#{topic.id}/edit"}
+            title={"Edit #{topic.title}"}
+            class="text-blue-500"
+          >
+            Edit
+          </.link>
+          <.link
+            href={"/topics/#{topic.id}"}
+            method={"delete"}
+            title={"Edit #{topic.title}"}
+            class="text-red-500"
+          >
+            Delete
+          </.link>
+        </div>
       </li>
     <% end %>
   </ul>
