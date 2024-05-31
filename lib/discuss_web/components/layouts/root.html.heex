@@ -13,8 +13,19 @@
   </head>
   <body class="bg-white antialiased">
     <nav class="bg-sky-500 text-white fixed top-0 left-0 w-full z-10 py-3 text-2xl">
-      <div class="container mx-auto">
+      <div class="container mx-auto flex justify-between px-16">
         <a href="/" class="hover:text-sky-200 transition">Discussions</a>
+        <ul class="flex items-center">
+          <li class="text-base hover:bg-slate-700 h-full px-4 flex items-center justify-center transition">
+          <%= if @conn.assigns[:user] do %>
+            <.link href="/auth/signout">Logout</.link>
+          <% else %>
+            <.link href="/auth/github">
+              Sign in with GitHub
+            </.link>
+          <% end %>
+          </li>
+        </ul>
       </div>
     </nav>
     <%= @inner_content %>
