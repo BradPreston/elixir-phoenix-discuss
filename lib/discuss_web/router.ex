@@ -8,6 +8,7 @@ defmodule DiscussWeb.Router do
     plug :put_root_layout, html: {DiscussWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Discuss.Plugs.SetUser
   end
 
   pipeline :api do
@@ -31,6 +32,7 @@ defmodule DiscussWeb.Router do
     # before running any of the routes below
     pipe_through :browser
 
+    get "/signout", AuthController, :signout
     # :provider is a wildcard for any OAuth strategies ex:
     # github, facebook, google, etc.
     # :request is defined for us by the ueberauth module
