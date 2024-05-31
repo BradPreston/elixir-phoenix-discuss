@@ -1,7 +1,7 @@
 # SetUser plug either successfully grabs a user from the database and
 # adds the user data to the assigns struct with the key user, or assigns
 # the key user with the value nil in the assigns struct if no user was found.
-defmodule Discuss.Plugs.SetUser do
+defmodule DiscussWeb.Plugs.SetUser do
   import Plug.Conn
 
   alias Discuss.Repo
