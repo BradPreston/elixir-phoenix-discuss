@@ -20,6 +20,13 @@ defmodule DiscussWeb.AuthController do
     signin(conn, changeset)
   end
 
+  def signout(conn, _params) do
+    conn
+    # drop all session data related to user from session
+    |> configure_session(drop: true)
+    |> redirect(to: ~p"/topics")
+  end
+
   # private function to handle signing in a user via cookies
   defp signin(conn, changeset) do
     case insert_or_update_user(changeset) do
