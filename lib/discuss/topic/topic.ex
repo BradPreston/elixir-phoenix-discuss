@@ -6,6 +6,8 @@ defmodule Discuss.Topic do
   schema "topics" do
     # the table should have a column called title where every value is a string
     field :title, :string
+    # a topic can belong to only one user
+    belongs_to :user, Discuss.User
   end
 
   # struct is a hash that represents a record in the database
