@@ -21,7 +21,13 @@ defmodule DiscussWeb.TopicController do
   # of the params object. Now we have access to topic (and only topic)
   # in the create function
   def create(conn, %{"topic" => topic}) do
-    changeset = Topic.changeset(%Topic{}, topic)
+    # changeset contains a user and associates this user with a created topic
+    changeset =
+      conn.assigns.user
+      # pass current user into build_assoc, which creates a Topic struct
+      |> Ecto.build_assoc(:topics)
+      # topic struct piped into changeset has a reference to current user
+      |> Topic.changeset(topic)
 
     case Repo.insert(changeset) do
       {:ok, _post} ->
